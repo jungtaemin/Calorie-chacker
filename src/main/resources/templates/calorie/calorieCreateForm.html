@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        .boldFont{
+            font-weight: bold;
+            color: rgb(131, 131, 131);
+        }
+        .boxModel{
+                display: flex;
+                width: 342px;
+                height: 200px;
+                flex-direction: column;
+                padding: 24px;
+                border-radius: 8px;
+                box-shadow: 0 1px 4px 0 rgb(230 235 240 / 80%);
+                border: solid 1px #e6ebf0;
+                background-color: #fff;
+                margin: 10px;
+        }
+        .titleFont{
+                font-size: 18px;
+                line-height: 28px;
+                font-weight: 700;
+        }
+        .normalFont{
+                font-size: 18px;
+                line-height: 28px;
+                font-weight: 400;
+        }
+        .grayFont{
+            font-size: 12px;
+                line-height: 28px;
+                font-weight: 400;
+                color: rgb(175, 175, 175);
+        }
+        .bigFont{
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 1000;
+            color: rgb(131, 131, 131);
+        }
+
+        .boxGroup{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+            background-color:#F2F2F2;
+        }
+
+        .bigBoxModel{
+                display: flex;
+                width: 900px;
+                flex-direction: column;
+                padding: 24px;
+                border-radius: 8px;
+                box-shadow: 0 1px 4px 0 rgb(230 235 240 / 80%);
+                border: solid 1px #e6ebf0;
+                background-color: #fff;
+                margin: 10px;
+        }
+        
+    </style>   
+</head>
+<body>
+<div class="article-write-grid">
+    <div class="header1">
+        <a th:href="@{/}"><img src="/img/로고.png"> </a>
+    </div>
+
+    <div class="header2">
+
+
+
+    </div>
+
+    <div class="header3">
+        <div sec:authorize="!isAuthenticated()">
+            <table  border="1px" class="table table-hover" style="width:280px;">
+                <thead>
+                <tr>
+                    <td>
+                        <div th:text="로그인해주세요"></div>
+                    </td>
+
+                    <td>
+
+                        <div sec:authorize="!isAuthenticated()">
+                            <form method="post"  th:action="@{/oauth2/authorization/google}">
+                                <button class="btn btn-outline-secondary" style="float:right;"><a>로그인</a></button>
+                            </form>
+                        </div>
+
+                    </td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="d-grid gap-2 d-md-block">
+                            <a th:href="@{/article/edit}">
+                                <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-grid gap-2 d-md-block">
+                            <button type="button" class="btn btn-secondary">내 목표 게시판</button>
+                        </div>
+                    </td>
+
+                </tr>
+                <!--
+              <tr>
+                  <td>
+                      <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">관심여행목록</a></button>
+                  </td>
+                  <td>
+                      <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">MY신청목록</a></button>
+                  </td>
+
+              </tr>-->
+                </tbody>
+
+
+            </table>
+        </div>
+
+
+        <table sec:authorize="hasRole('USER')" border="1px" class="table table-hover" style="width:280px;">
+            <thead>
+            <tr>
+                <td>
+                    <div th:text="${#authentication.name} + '님 '"></div>
+                </td>
+
+                <td>
+
+                    <div sec:authorize="isAuthenticated()">
+                        <form method="post"  id="logout" name="logout" th:action="@{/logout}">
+                            <button class="btn btn-outline-secondary" style="float:right;"><a>로그아웃</a></button>
+                        </form>
+                    </div>
+
+                </td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a th:href="@{/article/edit}">
+                            <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="button" class="btn btn-secondary">내목표게시판이동</button>
+                    </div>
+                </td>
+
+            </tr>
+            <!--
+            <tr>
+                <td>
+                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                </td>
+                <td>
+                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                </td>
+
+            </tr>
+            -->
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+
+
+    <!-- //////////////////////////////////////////////////////////////////////////////네비게이션바-->
+    <div class="menu">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">calorie-checker</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/calorie/save}">오늘의 칼로리 적기</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/totalCalorie/calendar}">칼로리 기록 달력</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                게시판 목록
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item"  th:href="@{/article/list/new(page=(1))}">다이어트 게시판</a></li>
+                                <li><a class="dropdown-item" th:href="@{/study/list/new(page=(1))}">공부 게시판</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--  메뉴 ///////////////////////////////////////////////////////////////////////////         -->
+
+    <div class="article-write">
+        <div class="container">
+    
+            <button type="button" class="btn btn-secondary" style="float:right;margin:3px;" onclick="formReset();" id="createCalorieBtn" data-bs-toggle="modal" data-bs-target="#createCalorie">칼로리 등록</button>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <div th:text="음식이름"></div>
+                    </th>
+                    <th>
+                        <div th:text="칼로리"></div>
+                    </th>
+                    <th style="width:28px">
+                        
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="myCalories">
+                </tbody>
+            </table>
+        <div class="boxGroup">
+            <div class="boxModel">
+                <p class="titleFont" id="totalCalTitle">오늘의총칼로리</p>
+                <p class="normalFont" id="totalCal"></p><span class="bigFont">Kal</span>
+            </div>
+            <div class="boxModel">
+                <p class="titleFont" id="totalWeightTitle">오늘의몸무게</p>
+                <div id="inputWeight"><input type="text" style="width: 120px;" maxlength="5" class="normalFont" id="totalWeight"></input><div class="grayFont">오늘 몸무게를 아직 기록하지 않았습니다.</div></div><span class="bigFont">kg</span>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" style="float:right;margin:3px;display: block;"  id="createTotalCalorie" data-bs-toggle="modal" data-bs-target="#totalCalorieAlert">기록하기</button>
+        <div class="bigBoxModel" onclick="displayBlock();">
+            <p class="titleFont" id="totalWeightTitle">사용 방법</p>
+            <p style="color: #dadada;" id="fo1">클릭하면 사용 방법을 읽을 수 있습니다.</p>
+            <div style="display: none;" id="useWhy">
+            <p>칼로리 등록시 음식과 칼로리를 등록할 수 있습니다.</p>
+            <p>오늘의총칼로리는 등록된 칼로리에따라 자동으로 계산됩니다.</p>
+            <p>오늘의 몸무게를 입력하고 기록하기를 누르면 등록했던 칼로리 정보를 참고하여 총 칼로리와 등록한 몸무게를 당일 기록으로 입력합니다.</p>
+            <p>기록하기로 기록된 기록은 칼로리 기록 달력에서 확인가능합니다.</p>
+            <p>!칼로리 정보는 기록하기를 누르지않고 다음날이 되어도 기록 달력에서 날짜를 클릭하면 지난 칼로리 정보도 확인가능하고 미처 기록하지못했던 기록도 가능합니다.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createCalorie" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">칼로리 등록</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="createCalorieForm" name="createCalorieForm" th:object="${createCalorieRequest}" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">음식 이름</label>
+                            <input type="text" class="form-control" th:field="*{name}" placeholder="음식 이름을 입력해주세요.">
+                        </div>
+                        <div class="mb-3">
+                            <label for="calorie" class="form-label" style="display: block;">음식 칼로리</label>
+                            <input style="width:430px;display: inline-block;" min="0" max="999" type="number" class="form-control" th:field="*{calorie}" placeholder="음식의 칼로리를 입력해주세요."><b class="boldFont">Kcal</b>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">메모</label>
+                            <textarea id="calorieTextArea" maxlength="100" onkeyup="numCount(this.value);" class="form-control" th:field="*{memo}" rows="3"></textarea>
+                            <div id="countNumber" class="boldFont" style="display: flex; justify-content: end;"><b id="count">0</b>/100</div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" id="createCalorieSaveBtn" onclick="calorieSave();">저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //Modal -->
+
+    <!-- alert 모달-->
+    <div class="modal fade" id="calorieAlert"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-body">
+                <p>칼로리 정보가 저장되었습니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="alertButton" onclick="modalClose();">확인</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--//alert 모달  -->
+
+        <!-- alert 모달-->
+        <div class="modal fade" id="totalCalorieAlert"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-body">
+                    <p>몸무게와 총칼로리를 기록하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" id="createTotalCalorieSaveBtn" onclick="saveTotalCalorie();">저장</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--//alert 모달  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</div>
+<script>
+		$(document).ready(function(){
+            reloadList();
+            reloadWeight();
+		});
+        
+        
+		function calorieSave(){
+            var form = $("#createCalorieForm")[0];        
+            var formData = new FormData(form);
+            $.ajax({
+			type: "POST",
+			url: '/calorie/save',
+            processData : false,
+            contentType : false,	
+			data: formData,
+			success: function (data) {
+				$("#calorieAlert").modal('show');
+			},
+			error: function (e) {
+				console.log("ERROR : ", e);
+			}
+		});
+		}
+
+        function reloadList(){
+            $.ajax({
+            url: "/calorie/list?page=0&size=5&sort=id,desc",
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json",
+            success: function (data) {
+                $("#myCalories").html('');
+                $.each(data.calories, function(index, item){
+                    $("#myCalories").append('<tr><td><div>'+item.name+'</div></td><td><div>'+item.calorie+'Kcal</div></td><td><button type="button" class="btn-close" onclick="deleteCalorie('+item.id+');" aria-label="Close"></button></td></tr>');
+			    });
+               $("#totalCal").html(data.totalCalorie);
+            },
+			error: function (e) {
+				console.log("ERROR : ", e);
+			}
+        });
+        }
+
+        function reloadWeight(){
+            $.ajax({
+            url: "/totalCalorie/weight",
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json",
+            success: function (data) {
+                if(data.weight ==0){    
+                }else{
+                    $("#inputWeight").html('<input type="text" style="width: 120px;" maxlength="5" class="normalFont" id="totalWeight" value="'+data.weight+'"></input>');
+                }
+            },
+			error: function (e) {
+				console.log("ERROR : ", e);
+			}
+        });
+        }
+
+
+
+
+        function numCount(value){
+            var content = value.length;
+            $('#count').html(content);
+        }
+
+        function modalClose(){
+            $(".modal").modal('hide');
+            reloadList();
+        }
+
+
+        function formReset(){
+            $("#createCalorieForm")[0].reset();
+            $("#count").html('0');
+        }
+        function displayBlock(){
+            $("#useWhy").toggle();
+            $("#fo1").toggle();
+        }
+
+        function deleteCalorie(id){
+            console.log(id);
+            var param = {"id": id};
+            $.ajax({
+            url: "/calorie/delete",
+            data: param,
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+                reloadList();
+            },
+            error: function (e) {
+				console.log("ERROR : ", e);
+			}
+        });
+        }
+        function saveTotalCalorie(){
+
+            var totalCal = $("#totalCal").html();
+            var weight = $("#totalWeight").val();
+            console.log(totalCal);
+            var param = {"totalCalories": totalCal,
+                        "weight" : weight};
+            $.ajax({
+            url: "/totalCalorie/save",
+            data: param,
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+                console.log(data)
+                $("#inputWeight").html('<input type="text" style="width: 120px;" maxlength="5" class="normalFont" id="totalWeight" value="'+data.weight+'"></input>');
+                $(".modal").modal('hide');
+                reloadList();
+            },
+            error: function (e) {
+				console.log("ERROR : ", e);
+			}
+        });
+
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/articleView.css}" />
+</head>
+<body>
+<div class="article-edit-grid">
+    <div class="header1">
+        <a th:href="@{/}"><img src="/img/로고.png"> </a>
+    </div>
+
+    <div class="header2">
+
+
+
+    </div>
+
+    <div class="header3">
+        <div sec:authorize="!isAuthenticated()">
+            <table  border="1px" class="table table-hover" style="width:280px;">
+                <thead>
+                <tr>
+                    <td>
+                        <div th:text="로그인해주세요"></div>
+                    </td>
+
+                    <td>
+
+                        <div sec:authorize="!isAuthenticated()">
+                            <form method="post"  th:action="@{/oauth2/authorization/google}">
+                                <button class="btn btn-outline-secondary" style="float:right;"><a>로그인</a></button>
+                            </form>
+                        </div>
+
+                    </td>
+                </tr>
+                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a th:href="@{/article/edit}">
+                                                <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button type="button" class="btn btn-secondary">내 목표 게시판</button>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                                <!--
+                                <tr>
+                                    <td>
+                                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">관심여행목록</a></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">MY신청목록</a></button>
+                                    </td>
+
+                                </tr>-->
+                                </tbody>
+
+
+            </table>
+        </div>
+
+
+        <table sec:authorize="hasRole('USER')" border="1px" class="table table-hover" style="width:280px;">
+            <thead>
+            <tr>
+                <td>
+                    <div th:text="${#authentication.name} + '님 '"></div>
+                </td>
+
+                <td>
+
+                    <div sec:authorize="isAuthenticated()">
+                        <form method="post"  id="logout" name="logout" th:action="@{/logout}">
+                            <button class="btn btn-outline-secondary" style="float:right;"><a>로그아웃</a></button>
+                        </form>
+                    </div>
+
+                </td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a th:href="@{/article/edit}">
+                            <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="button" class="btn btn-secondary">내목표게시판이동</button>
+                    </div>
+                </td>
+
+            </tr>
+            <!--
+            <tr>
+                <td>
+                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                </td>
+                <td>
+                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                </td>
+
+            </tr>
+            -->
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <!-- //////////////////////////////////////////////////////////////////////////////네비게이션바-->
+    <div class="menu">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">목표를 이뤄보자</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/}">최신글</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">문의 게시판</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                게시판 목록
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item"  th:href="@{/article/list/new(page=(1))}">다이어트 게시판</a></li>
+                                <li><a class="dropdown-item" th:href="@{/study/list/new(page=(1))}">공부 게시판</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--  //메뉴 끝///////////////////////////////////////////////////////////////////////////         -->
+
+
+    <div class="viewTitle" style="margin-right:100px; margin-left:100px">
+        <div>
+    <div class="f-middle" style="border-top: 1px solid;border-bottom: 1px solid;" th:text="${viewList.title}">
+        <!--<div class="f-middle" th:text="${user.userName}"></h5></div>-->
+    </div>
+            <div class="flex-only">
+            <div class="f-small" style="border-bottom: 1px solid;" th:text="${writer.userName}"></div>
+                <div class="button-goodbad">
+                <div class="f-middle"  th:text="'추천:'"></div>
+                <div class="f-middle"  th:text="${viewList.hit}"></div>
+                <div class="f-middle"  th:text="'비추천:'"></div>
+                <div class="f-middle"  th:text="${viewList.bad}"></div>
+                </div>
+            </div>
+
+
+
+    <div class="content">
+        <div class="f-middle" th:text="${viewList.content}"></div>
+    </div>
+        <div class="button-goodbad">
+        <button type="button" class="btn btn-outline-danger" style="margin:15px;">추천</button>
+        <button type="button" class="btn btn-outline-primary" style="margin:15px;">비추천</button>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

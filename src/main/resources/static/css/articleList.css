@@ -1,0 +1,85 @@
+.article-list-grid{
+
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows:213px 64px 700px 200px;
+        grid-template-areas:
+        "header1 header2 header3"
+        "menu menu menu"
+        "list list list"
+        "paging paging paging";
+        gap: 10px;
+
+
+}
+
+
+
+.article-list{
+    grid-area:list;
+    display:flex;
+     width:1000px;
+     margin:0 auto;
+     flex-direction: column
+
+
+}
+
+.atagCard{
+    text-decoration: none;
+}
+
+
+.list-smallTitle{
+font-size:15px;
+    color:rgb(85, 94, 94);
+    text-decoration: none;
+
+}
+
+.list-smallContent{
+
+font-size:10px;
+    color:rgb(85, 94, 94);
+    text-decoration: none;
+
+
+}
+
+.list-bigTitle{
+    font-size:23px;
+        color:rgb(85, 94, 94);
+        text-decoration: none;
+        margin:7px;
+        font-weight:bold;
+
+}
+
+.atag-none{
+color:rgb(85, 94, 94);
+    text-decoration: none;
+
+
+}
+
+.article-paging{
+         grid-area:paging;
+         margin:0 auto;
+
+}
+
+.list-buttongroup{
+    display:flex;
+    justify-content: space-between
+
+}
+
+
+.article-title-main{
+    font-size:23px;
+            color:rgb(85, 94, 94);
+            text-decoration: none;
+            margin:5px;
+            font-weight:bold;
+
+}
