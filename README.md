@@ -64,7 +64,7 @@ crud를 다 적용시킬수 있음을 보여주려고 노력하였습니다.
 ## 칼로리 기록 달력
 ### 칼로리 달력에서 상세보기
 ![detailCalander](https://user-images.githubusercontent.com/96284736/225451651-1eea249c-0f54-4f92-8a83-da7a7cce32e7.gif)
-* 클릭하면 그날 기록한 칼로리와 몸무게를 확인가능하고 
+* 클릭하면 그날 기록한 칼로리와 몸무게를 확인가능하고 칼로리 클릭시 이미지와 메모를 포함한 등록했던 모든 정보를 상세모달로 확인 가능하다.
 ## OAuth2 소셜 로그인
 ![dddd](https://user-images.githubusercontent.com/96284736/177117919-f8bfda71-3dc3-4d8a-9d14-97cee6a7419d.PNG)
 
