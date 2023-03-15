@@ -47,15 +47,24 @@ crud를 다 적용시킬수 있음을 보여주려고 노력하였습니다.
 
 
 # 핵심 기능
-## 칼로리 등록
+## 오늘의 칼로리 적기
+### 칼로리 등록
 ![createCalorie](https://user-images.githubusercontent.com/96284736/225451612-422c6db8-760c-4e4f-9b28-787db677ba79.gif)
-## 칼로리 기록
+* 오늘의 칼로리 적기에서 칼로리 등록하기 버튼을 클릭해서 모달폼에서 음식이름,칼로리,이미지,메모 정보를 입력한 뒤 등록하면 칼로리가 등록된다.
+* 밤12시가 지나서 다른날이되기전까지는 칼로리 와 몸무게 기록들은 계속남아있으며 하루가 지날때까지 수정하거나 지울 수 있다.
+* x버튼을 누르면 칼로리를 삭제할 수 있다.
+* 오늘의 총칼로리는 오늘 저장한 칼로리의 합을 자동으로 계산후 보여준다.
+### 칼로리 기록
 ![showCalander](https://user-images.githubusercontent.com/96284736/225451629-a8efe313-1de1-4150-b032-5bad681364d9.gif)
-## 칼로리 상세보기
+* 오늘의몸무게를 적고 기록하기를 누르면 해당 정보로 칼로리 기록 달력에 기록한다.
+### 칼로리 상세보기
 ![detailCalorie](https://user-images.githubusercontent.com/96284736/225451639-0bae1259-c1be-41b6-b063-c250c9cfc1df.gif)
-## 칼로리 달력에서 상세보기
+* 칼로리를 클릭하면 등록했던 등록정보들을 볼 수 있다.
+## 칼로리 기록 달력
+### 칼로리 달력에서 상세보기
 ![detailCalander](https://user-images.githubusercontent.com/96284736/225451651-1eea249c-0f54-4f92-8a83-da7a7cce32e7.gif)
-
+* 기록한 날은 달력에 총칼로리와 몸무게를 출력하고 기록하지 않은날은 출력을 하지않는다.
+* 클릭하면 그날 기록한 칼로리와 몸무게를 확인가능하고 
 ## OAuth2 소셜 로그인
 ![dddd](https://user-images.githubusercontent.com/96284736/177117919-f8bfda71-3dc3-4d8a-9d14-97cee6a7419d.PNG)
 
