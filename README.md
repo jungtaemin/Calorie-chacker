@@ -47,6 +47,14 @@ crud를 다 적용시킬수 있음을 보여주려고 노력하였습니다.
 
 
 # 핵심 기능
+## 칼로리 등록
+![createCalorie](https://user-images.githubusercontent.com/96284736/225451612-422c6db8-760c-4e4f-9b28-787db677ba79.gif)
+## 칼로리 기록
+![showCalander](https://user-images.githubusercontent.com/96284736/225451629-a8efe313-1de1-4150-b032-5bad681364d9.gif)
+## 칼로리 상세보기
+![detailCalorie](https://user-images.githubusercontent.com/96284736/225451639-0bae1259-c1be-41b6-b063-c250c9cfc1df.gif)
+## 칼로리 달력에서 상세보기
+![detailCalander](https://user-images.githubusercontent.com/96284736/225451651-1eea249c-0f54-4f92-8a83-da7a7cce32e7.gif)
 
 ## OAuth2 소셜 로그인
 ![dddd](https://user-images.githubusercontent.com/96284736/177117919-f8bfda71-3dc3-4d8a-9d14-97cee6a7419d.PNG)
