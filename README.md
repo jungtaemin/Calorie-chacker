@@ -116,12 +116,6 @@ JPA와 시큐리티를 학습후 그것들을 적용하여 calorieChecker페이�
 ``` 쿼리 메소드 @Query 어노테이션을 사용 like %:??% 를 써서 제목과 내용으로 검색되게 만들었습니다. ```
 
 
-## 최신글보기
-![최신순글](https://user-images.githubusercontent.com/96284736/177155177-fae61f5e-61ff-45ed-8dac-35ea9ac1385f.PNG)
-
-
-``` 메소드 이름으로 자동으로 쿼리를 생성하는 jpa의 기능으로 List<Article>findTop5ByOrderByIdDesc() 메소드를 만들어 등록된 게시글중 최근 5개의 게시글을 제목과 작성일로 게시판별로 보여줍니다.클릭하여 게시글내용을 볼수있는 페이지로 이동.```
-
 
 # 프로젝트 후기
 
