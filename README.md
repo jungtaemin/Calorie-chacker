@@ -29,6 +29,7 @@ JPA와 시큐리티를 학습후 그것들을 적용하여 calorieChecker페이�
 - Thymeleaf
 - Bootstrap 5
 - html/css
+- jQuery
 
 **라이브러리**
 - Lombok
