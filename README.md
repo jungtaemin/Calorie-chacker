@@ -34,6 +34,9 @@ JPA와 시큐리티를 학습후 그것들을 적용하여 calorieChecker페이�
 
 # ERD
 ![캡처erd](https://user-images.githubusercontent.com/96284736/225562174-703888f3-71c8-4a18-8d5c-05cc49c5139e.PNG)
+* user 테이블은 oauth2 회원가입 정보저장 테이블입니다.
+* upload 는 calorie 저장시 이미지 등록을 하면 저장되는 이미지정보 테이블입니다.
+
 # 핵심 기능
 ## 오늘의 칼로리 적기
 ### 칼로리 등록
