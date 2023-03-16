@@ -4,7 +4,6 @@ crud를 다 적용시킬수 있음을 보여주려고 노력하였습니다.
 # 목차
  - [사용 기술](https://github.com/jungtaemin/Calorie-chacker#사용-기술)
  - [ERD](https://github.com/jungtaemin/Calorie-chacker#ERD)
- - [패키징 구조](https://github.com/jungtaemin/Calorie-chacker#패키징-구조)
  - [핵심 기능](https://github.com/jungtaemin/Calorie-chacker#핵심-기능)
  - [프로젝트 후기](https://github.com/jungtaemin/Calorie-chacker#프로젝트-후기)
 # 사용 기술
