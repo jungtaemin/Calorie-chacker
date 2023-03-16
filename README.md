@@ -2,11 +2,10 @@
 JPA와 시큐리티를 학습후 그것들을 적용하여 게시판을 만들었습니다.<br/>
 crud를 다 적용시킬수 있음을 보여주려고 노력하였습니다.
 # 목차
- - [사용 기술](https://github.com/jungtaemin/tripproject#사용-기술)
- - [프로젝트 설계](https://github.com/jungtaemin/tripproject#프로젝트-설계)
- - [패키징 구조](https://github.com/jungtaemin/tripproject#패키징-구조)
- - [핵심 기능](https://github.com/jungtaemin/tripproject#핵심-기능)
- - [프로젝트 후기](https://github.com/jungtaemin/tripproject#프로젝트-후기)
+ - [사용 기술](https://github.com/jungtaemin/Calorie-chacker#사용-기술)
+ - [ERD](https://github.com/jungtaemin/Calorie-chacker#ERD)
+ - [핵심 기능](https://github.com/jungtaemin/Calorie-chacker#핵심-기능)
+ - [프로젝트 후기](https://github.com/jungtaemin/Calorie-chacker#프로젝트-후기)
 # 사용 기술
 
 
@@ -33,21 +32,28 @@ crud를 다 적용시킬수 있음을 보여주려고 노력하였습니다.
 - MapStruct
 # 프로젝트 설계
 
-# 패키징 구조
-![03](https://user-images.githubusercontent.com/96284736/177046629-2abea7a7-b9b4-4df9-a6a8-eb7ef30173fb.png)
-
-**헥사고날 아키텍처**<br/>
-내 프로젝트의 article의 패키징<br/>
-![zzzzz](https://user-images.githubusercontent.com/96284736/177046924-70c734bc-8157-4252-9852-175eaed14f1d.PNG)<br/>
-```프로젝트 구조를 헥사고날 아키텍처로 하였습니다.```
-
-```아키텍처 확장에 용이하고 SOLID 원칙을 쉽게 적용할 수 있는 등 장점이 많아 헥사고날 아키텍처를 적용하였습니다.```
-
-
-
+# ERD
+![캡처erd](https://user-images.githubusercontent.com/96284736/225562174-703888f3-71c8-4a18-8d5c-05cc49c5139e.PNG)
 
 # 핵심 기능
-
+## 오늘의 칼로리 적기
+### 칼로리 등록
+![createCalorie](https://user-images.githubusercontent.com/96284736/225451612-422c6db8-760c-4e4f-9b28-787db677ba79.gif)
+* 오늘의 칼로리 적기에서 칼로리 등록하기 버튼을 클릭해서 모달폼에서 음식이름,칼로리,이미지,메모 정보를 입력한 뒤 등록하면 칼로리가 등록된다.
+* 밤12시가 지나서 다른날이되기전까지는 칼로리 와 몸무게 기록들은 계속남아있으며 하루가 지날때까지 수정하거나 지울 수 있다.
+* x버튼을 누르면 칼로리를 삭제할 수 있다.
+* 오늘의 총칼로리는 오늘 저장한 칼로리의 합을 자동으로 계산후 보여준다.
+### 칼로리 기록
+![showCalander](https://user-images.githubusercontent.com/96284736/225451629-a8efe313-1de1-4150-b032-5bad681364d9.gif)
+* 오늘의몸무게를 적고 기록하기를 누르면 총칼로리 정보와 몸무게 정보 그리고 칼로리 정보를 칼로리 기록 달력에 기록한다.
+* 기록한 날은 달력에 총칼로리와 몸무게를 출력하고 기록하지 않은날은 출력을 하지않는다.
+### 칼로리 상세보기
+![detailCalorie](https://user-images.githubusercontent.com/96284736/225451639-0bae1259-c1be-41b6-b063-c250c9cfc1df.gif)
+* 칼로리를 클릭하면 등록했던 등록정보들을 볼 수 있다.
+## 칼로리 기록 달력
+### 칼로리 달력에서 상세보기
+![detailCalander](https://user-images.githubusercontent.com/96284736/225451651-1eea249c-0f54-4f92-8a83-da7a7cce32e7.gif)
+* 클릭하면 그날 기록한 칼로리와 몸무게를 확인가능하고 칼로리 클릭시 이미지와 메모를 포함한 등록했던 모든 정보를 상세모달로 확인 가능하다.
 ## OAuth2 소셜 로그인
 ![dddd](https://user-images.githubusercontent.com/96284736/177117919-f8bfda71-3dc3-4d8a-9d14-97cee6a7419d.PNG)
 
