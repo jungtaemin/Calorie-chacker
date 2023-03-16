@@ -1,3 +1,4 @@
+![calorieCheckerMainLogo](https://user-images.githubusercontent.com/96284736/225597223-1d862c67-c72a-48be-975b-004d87f1e559.jpg)
 # calorieChecker
 JPA와 시큐리티를 학습후 그것들을 적용하여 calorieChecker페이지를 만들었습니다.</br>
 전체적인 기능은 오늘먹은 음식에 대한 칼로리를 기록하고 달력으로 그동안 기록한 것을 확인하고 다이어트를 하는 기능을 개발하자는 생각으로 만들었습니다.
