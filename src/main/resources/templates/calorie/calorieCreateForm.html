@@ -68,42 +68,92 @@
                 background-color: #fff;
                 margin: 10px;
         }
+
+        .smallImg{
+            width: 150px;
+            height: 150px;
+        }
         
     </style>   
 </head>
 <body>
 <div class="article-write-grid">
-    <div class="header1">
-        <a th:href="@{/}"><img src="/img/로고.png"> </a>
-    </div>
+    <div class="header1" style="position: relative;">
+        <a th:href="@{/}"><img src="/img/calorieCheckerMainLogo.jpg"> </a>
 
-    <div class="header2">
-
-
-
-    </div>
-
-    <div class="header3">
-        <div sec:authorize="!isAuthenticated()">
-            <table  border="1px" class="table table-hover" style="width:280px;">
+        <div style="position: absolute;right:-1750px;top:10px;background-color: #fff;">
+            <div sec:authorize="!isAuthenticated()">
+                <table  border="1px" class="table table-hover" style="width:280px;">
+                    <thead>
+                    <tr>
+                        <td>
+                            <div th:text="로그인해주세요"></div>
+                        </td>
+    
+                        <td>
+    
+                            <div sec:authorize="!isAuthenticated()">
+                                <form method="post"  th:action="@{/oauth2/authorization/google}">
+                                    <button class="btn btn-outline-secondary" style="float:right;"><a>로그인</a></button>
+                                </form>
+                            </div>
+    
+                        </td>
+                    </tr>
+                    </thead>
+    
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-grid gap-2 d-md-block">
+                                                <a th:href="@{/article/edit}">
+                                                    <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-grid gap-2 d-md-block">
+                                                <button type="button" class="btn btn-secondary">내 목표 게시판</button>
+                                            </div>
+                                        </td>
+    
+                                    </tr>
+                                    <!--
+                                  <tr>
+                                      <td>
+                                          <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">관심여행목록</a></button>
+                                      </td>
+                                      <td>
+                                          <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">MY신청목록</a></button>
+                                      </td>
+    
+                                  </tr>-->
+                                  </tbody>
+    
+    
+                </table>
+            </div>
+    
+    
+            <table sec:authorize="hasRole('USER')" border="1px" class="table table-hover" style="width:280px;">
                 <thead>
                 <tr>
                     <td>
-                        <div th:text="로그인해주세요"></div>
+                        <div th:text="${#authentication.name} + '님 '"></div>
                     </td>
-
+    
                     <td>
-
-                        <div sec:authorize="!isAuthenticated()">
-                            <form method="post"  th:action="@{/oauth2/authorization/google}">
-                                <button class="btn btn-outline-secondary" style="float:right;"><a>로그인</a></button>
+    
+                        <div sec:authorize="isAuthenticated()">
+                            <form method="post"  id="logout" name="logout" th:action="@{/logout}">
+                                <button class="btn btn-outline-secondary" style="float:right;"><a>로그아웃</a></button>
                             </form>
                         </div>
-
+    
                     </td>
                 </tr>
                 </thead>
-
+    
                 <tbody>
                 <tr>
                     <td>
@@ -115,77 +165,27 @@
                     </td>
                     <td>
                         <div class="d-grid gap-2 d-md-block">
-                            <button type="button" class="btn btn-secondary">내 목표 게시판</button>
+                            <button type="button" class="btn btn-secondary">내목표게시판이동</button>
                         </div>
                     </td>
-
+    
                 </tr>
                 <!--
-              <tr>
-                  <td>
-                      <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">관심여행목록</a></button>
-                  </td>
-                  <td>
-                      <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">MY신청목록</a></button>
-                  </td>
-
-              </tr>-->
+                <tr>
+                    <td>
+                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                    </td>
+                    <td>
+                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                    </td>
+    
+                </tr>
+                -->
                 </tbody>
-
-
+    
             </table>
         </div>
-
-
-        <table sec:authorize="hasRole('USER')" border="1px" class="table table-hover" style="width:280px;">
-            <thead>
-            <tr>
-                <td>
-                    <div th:text="${#authentication.name} + '님 '"></div>
-                </td>
-
-                <td>
-
-                    <div sec:authorize="isAuthenticated()">
-                        <form method="post"  id="logout" name="logout" th:action="@{/logout}">
-                            <button class="btn btn-outline-secondary" style="float:right;"><a>로그아웃</a></button>
-                        </form>
-                    </div>
-
-                </td>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr>
-                <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <a th:href="@{/article/edit}">
-                            <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
-                        </a>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button type="button" class="btn btn-secondary">내목표게시판이동</button>
-                    </div>
-                </td>
-
-            </tr>
-            <!--
-            <tr>
-                <td>
-                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
-                </td>
-                <td>
-                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
-                </td>
-
-            </tr>
-            -->
-            </tbody>
-
-        </table>
+    
     </div>
 
 
@@ -289,9 +289,13 @@
                             <input style="width:430px;display: inline-block;" min="0" max="999" type="number" class="form-control" th:field="*{calorie}" placeholder="음식의 칼로리를 입력해주세요."><b class="boldFont">Kcal</b>
                         </div>
                         <div class="mb-3">
+                            <label for="uploadImg" class="form-label" style="display: block;">이미지</label>
+                            <input style="width:430px;display: inline-block;" min="0" max="999" type="file" class="form-control" th:field="*{uploadImg}">
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">메모</label>
                             <textarea id="calorieTextArea" maxlength="100" onkeyup="numCount(this.value);" class="form-control" th:field="*{memo}" rows="3"></textarea>
-                            <div id="countNumber" class="boldFont" style="display: flex; justify-content: end;"><b id="count">0</b>/100</div>
+                            <div id="countNumber" class="boldFont" style="display: flex; justify-content: end;"><b id="count" class="numCount">0</b>/100</div>
                         </div>
                     </div>
                 </form>
@@ -303,6 +307,47 @@
         </div>
     </div>
     <!-- //Modal -->
+
+     <!-- detail Modal -->
+     <div class="modal fade" id="detailCalorieModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detailName">음식 이름</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="detailCalorieForm" name="detailCalorieForm" th:object="${updateCalorieRequest}" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">음식 이름</label>
+                            <input type="text" class="form-control" th:field="*{updateName}" placeholder="음식 이름을 입력해주세요.">
+                        </div>
+                        <div class="mb-3">
+                            <label for="calorie" class="form-label" style="display: block;">음식 칼로리</label>
+                            <input style="width:430px;display: inline-block;" min="0" max="999" type="number" class="form-control" th:field="*{updateCalorie}" placeholder="음식의 칼로리를 입력해주세요."><b class="boldFont">Kcal</b>
+                        </div>
+                        <div class="mb-3">
+                            <label for="uploadImg" class="form-label" style="display: block;">이미지</label>
+                            <input style="width:430px;display: inline-block;" type="file" class="form-control" th:field="*{updateUploadImg}">
+                            <img id="detailImg" class="smallImg"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">메모</label>
+                            <textarea maxlength="100" onkeyup="numCount(this.value);" class="form-control" th:field="*{updateMemo}" rows="3"></textarea>
+                            <div id="countNumber" class="boldFont" style="display: flex; justify-content: end;"><b id="detailCount" class="numCount">0</b>/100</div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //Modal -->
+
+
+
 
     <!-- alert 모달-->
     <div class="modal fade" id="calorieAlert"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -371,7 +416,7 @@
             success: function (data) {
                 $("#myCalories").html('');
                 $.each(data.calories, function(index, item){
-                    $("#myCalories").append('<tr><td><div>'+item.name+'</div></td><td><div>'+item.calorie+'Kcal</div></td><td><button type="button" class="btn-close" onclick="deleteCalorie('+item.id+');" aria-label="Close"></button></td></tr>');
+                    $("#myCalories").append('<tr><td onclick="listDetailPage('+item.id+');" style="cursor:pointer;"><div>'+item.name+'</div></td><td onclick="listDetailPage('+item.id+');" style="cursor:pointer;"><div>'+item.calorie+'Kcal</div></td><td><button type="button" class="btn-close" onclick="deleteCalorie('+item.id+');" aria-label="Close"></button></td></tr>');
 			    });
                $("#totalCal").html(data.totalCalorie);
             },
@@ -404,7 +449,7 @@
 
         function numCount(value){
             var content = value.length;
-            $('#count').html(content);
+            $(".numCount").html(content);
         }
 
         function modalClose(){
@@ -461,6 +506,31 @@
 			}
         });
 
+        }
+
+        function listDetailPage(id){
+            $("#detailCalorieForm")[0].reset();
+
+            var param = {"id": id};
+            $.ajax({
+			type: "GET",
+			url: '/calorie/detail',
+            dataType: "json",
+			data: param,
+			success: function (data) {
+                console.log(data)
+                $("#detailCalorieModal").modal('show');
+                $("#detailName").html(data.name)
+                $("#updateName").val(data.name);
+                $("#updateCalorie").val(data.calorie);
+                $("#updateMemo").html(data.memo);
+                $("#detailImg").attr("src","/upload/downloadImg/"+data.storeFileName)
+                $("#detailCount").html($("#updateMemo").val().length);
+            },
+			error: function (e) {
+				console.log("ERROR : ", e);
+			}
+		    });
         }
 </script>
 </body>

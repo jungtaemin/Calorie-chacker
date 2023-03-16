@@ -21,7 +21,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create #create update none
+      ddl-auto: update #create update none
     properties:
       hibernate:
         format_sql: true
@@ -62,3 +62,5 @@ spring:
             user-name-attribute: response # 회원정보를 json의 response 키값으로 리턴해줌.
 
 
+file:
+    dir: C:\Users\jtm02\Documents\uploadImg\

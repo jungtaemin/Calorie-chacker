@@ -1,5 +1,6 @@
 package com.tripproject.calorie.dto.response;
 
+import com.tripproject.upload.domain.Upload;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ListCalorieResponse {
 
+    /** id */
     private Long id;
-
     /** 음식 이름 */
     private String name;
     /** 칼로리 */

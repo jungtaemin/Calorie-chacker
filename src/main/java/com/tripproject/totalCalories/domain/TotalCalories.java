@@ -44,4 +44,5 @@ public class TotalCalories extends BaseEntity {
         this.totalCalories = totalCalories;
         this.weight = weight;
     }
+
 }

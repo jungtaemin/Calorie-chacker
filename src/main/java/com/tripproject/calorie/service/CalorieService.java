@@ -3,6 +3,7 @@ package com.tripproject.calorie.service;
 import com.tripproject.calorie.domain.Calorie;
 import com.tripproject.calorie.dto.request.CreateCalorieRequest;
 import com.tripproject.calorie.dto.request.SelectCalorieListRequest;
+import com.tripproject.calorie.dto.response.CalorieResponse;
 import com.tripproject.calorie.dto.response.ListCaloriePageResponse;
 import com.tripproject.calorie.dto.response.ListCalorieResponse;
 import com.tripproject.calorie.repository.CalorieRepository;
@@ -30,6 +31,7 @@ public class CalorieService {
 
     @Transactional
     public CreateCalorieRequest createTotalCalorieJoin(final Long userId,final CreateCalorieRequest createCalorieRequest){
+
         Optional<TotalCalories> resultDate = totalCalorieRepository.findByDate(userId,LocalDate.now());
         resultDate.ifPresent(date ->createCalorieRequest.setTotalCalories(date));
         if(resultDate.isEmpty()){
@@ -59,6 +61,13 @@ public class CalorieService {
         Page<ListCalorieResponse> listCalorieResponses = calorieRepository.findByUserId(id,selectCalorieListRequest.dateFormatChange(), PageRequest.of(0,5,Sort.by("id").descending()))
                 .map(calorie -> new ListCalorieResponse(calorie.getId(), calorie.getName(), calorie.getCalorie(), calorie.getMemo()));
         return ListCaloriePageResponse.of(listCalorieResponses);
+    }
+
+    public CalorieResponse calorieDetail(final Long id){
+        Optional<Calorie> detailByUserId = calorieRepository.findById(id);
+
+        Calorie calorie = detailByUserId.orElseThrow(() -> new IllegalStateException("칼로리 정보가 없습니다."));
+        return new CalorieResponse(calorie);
     }
 
 }

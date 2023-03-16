@@ -2,11 +2,13 @@ package com.tripproject.calorie.domain;
 
 import com.tripproject.shared.domain.BaseEntity;
 import com.tripproject.totalCalories.domain.TotalCalories;
+import com.tripproject.upload.domain.Upload;
 import com.tripproject.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -28,10 +30,15 @@ public class Calorie extends BaseEntity {
     private Integer calorie;
     /** 메모 */
     private String memo;
+    
     /** 회원 - 연관관계 매핑 */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "upload_id")
+    private Upload upload;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "total_calories_id")
@@ -44,6 +51,16 @@ public class Calorie extends BaseEntity {
         this.user = user;
         setTotalCalories(totalCalories);
     }
+    public Calorie(String name, Integer calorie, String memo, User user,TotalCalories totalCalories,Upload upload) {
+        this.name = name;
+        this.calorie = calorie;
+        this.memo = memo;
+        this.user = user;
+        setTotalCalories(totalCalories);
+        this.upload = upload;
+    }
+
+
 
     private void setTotalCalories(TotalCalories totalCalories){
 

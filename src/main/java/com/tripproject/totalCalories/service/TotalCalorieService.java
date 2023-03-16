@@ -1,5 +1,6 @@
 package com.tripproject.totalCalories.service;
 
+import com.tripproject.calorie.dto.request.SelectCalorieListRequest;
 import com.tripproject.totalCalories.domain.TotalCalories;
 import com.tripproject.totalCalories.dto.request.YearMonthTotalCalorieRequest;
 import com.tripproject.totalCalories.dto.response.BasicTotalCaloriesResponse;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 public class TotalCalorieService {
 
     private final TotalCalorieRepository totalCalorieRepository;
+
+
 
     @Transactional
     public BasicTotalCaloriesResponse createTotalCalorie(final Long userId,final TotalCalories totalCalories){
@@ -43,11 +46,25 @@ public class TotalCalorieService {
         }
     }
 
+    public BasicTotalCaloriesResponse getCustomTotalCalorie(final Long userId,final SelectCalorieListRequest selectCalorieListRequest){
+        Optional<TotalCalories> resultDate = totalCalorieRepository.findByDate(userId,selectCalorieListRequest.dateFormatChange());
+        if(resultDate.isEmpty()){
+            return new BasicTotalCaloriesResponse(TotalCalories.builder().build());
+        }else{
+            return new BasicTotalCaloriesResponse(resultDate.get());
+        }
+    }
+
 
     public Map<Integer,BasicTotalCaloriesResponse> getTotalCalorieCalendar(final Long userId,final YearMonthTotalCalorieRequest yearMonthTotalCalorieRequest){
         yearMonthTotalCalorieRequest.createStartEndDate();
         List<TotalCalories> calendarByStartEnd = totalCalorieRepository.findCalendarByStartEnd(userId,yearMonthTotalCalorieRequest.getStartDate(),yearMonthTotalCalorieRequest.getEndDate());
-        return CalendarFactory.calendarCreate(yearMonthTotalCalorieRequest.getStartDate(), yearMonthTotalCalorieRequest.getEndDate(), calendarByStartEnd);
+        if(calendarByStartEnd.isEmpty()){
+           return CalendarFactory.calendarNoSizeCreate(yearMonthTotalCalorieRequest.getStartDate(), yearMonthTotalCalorieRequest.getEndDate());
+        }else{
+            return CalendarFactory.calendarCreate(yearMonthTotalCalorieRequest.getStartDate(), yearMonthTotalCalorieRequest.getEndDate(), calendarByStartEnd);
+        }
+
     }
 
 }

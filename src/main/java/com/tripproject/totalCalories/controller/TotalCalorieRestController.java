@@ -1,5 +1,6 @@
 package com.tripproject.totalCalories.controller;
 
+import com.tripproject.exception.NoSuchUserException;
 import com.tripproject.totalCalories.domain.TotalCalories;
 import com.tripproject.totalCalories.dto.request.CreateTotalCalorieRequest;
 import com.tripproject.totalCalories.dto.request.YearMonthTotalCalorieRequest;
@@ -27,12 +28,14 @@ public class TotalCalorieRestController {
     @PostMapping("/save")
     public ResponseEntity<BasicTotalCaloriesResponse> createTotalCalorie(@AuthenticationPrincipal PrincipalDetails principal,
                                                                          CreateTotalCalorieRequest createTotalCalorieRequest){
+        userCheckValidation(principal);
         BasicTotalCaloriesResponse totalCalorie = totalCalorieService.createTotalCalorie(principal.getUser().getId(),createTotalCalorieRequest.toEntity());
         return ResponseEntity.ok(totalCalorie);
     }
 
     @GetMapping("/weight")
     public ResponseEntity<BasicTotalCaloriesResponse> getTodayTotalCalorie(@AuthenticationPrincipal PrincipalDetails principal){
+        userCheckValidation(principal);
         BasicTotalCaloriesResponse todayTotalCalorie = totalCalorieService.getTodayTotalCalorie(principal.getUser().getId());
         return ResponseEntity.ok(todayTotalCalorie);
     }
@@ -40,8 +43,16 @@ public class TotalCalorieRestController {
     @GetMapping("/calendarList")
     public ResponseEntity<Map<Integer, BasicTotalCaloriesResponse>> getTotalCalorieCalendar(@AuthenticationPrincipal PrincipalDetails principal,
                                                                                     YearMonthTotalCalorieRequest yearMonthTotalCalorieRequest){
+
+        userCheckValidation(principal);
         Map<Integer, BasicTotalCaloriesResponse> totalCalorieCalendar = totalCalorieService.getTotalCalorieCalendar(principal.getUser().getId(), yearMonthTotalCalorieRequest);
         return ResponseEntity.ok(totalCalorieCalendar);
+    }
+
+    private void userCheckValidation(PrincipalDetails principal) {
+        if(principal == null){
+            throw new NoSuchUserException("회원 정보가 없습니다.로그인 해 주세요.");
+        }
     }
 
 }

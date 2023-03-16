@@ -12,123 +12,114 @@
 </head>
 <body>
 <div class="grid">
-    <div class="header1">
-        <a th:href="@{/}"><img src="/img/로고.png"> </a>
-    </div>
+    <div class="header1" style="position: relative;">
+        <a th:href="@{/}"><img src="/img/calorieCheckerMainLogo.jpg"> </a>
 
-    <div class="header2">
-
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width:90%">
-            <button class="btn btn-outline-secondary" type="submit"><img src="/img/검색.png" style="width:50px;"></button>
-        </form>
-
-    </div>
-
-    <div class="header3">
-        <div sec:authorize="!isAuthenticated()">
-            <table  border="1px" class="table table-hover" style="width:280px;">
+        <div style="position: absolute;right:-1800px;top:10px;background-color: #fff;">
+            <div sec:authorize="!isAuthenticated()">
+                <table  border="1px" class="table table-hover" style="width:280px;">
+                    <thead>
+                    <tr>
+                        <td>
+                            <div th:text="로그인해주세요"></div>
+                        </td>
+    
+                        <td>
+    
+                            <div sec:authorize="!isAuthenticated()">
+                                <form method="post"  th:action="@{/oauth2/authorization/google}">
+                                    <button class="btn btn-outline-secondary" style="float:right;"><a>로그인</a></button>
+                                </form>
+                            </div>
+    
+                        </td>
+                    </tr>
+                    </thead>
+    
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-grid gap-2 d-md-block">
+                                                <a th:href="@{/article/edit}">
+                                                    <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-grid gap-2 d-md-block">
+                                                <button type="button" class="btn btn-secondary">내 목표 게시판</button>
+                                            </div>
+                                        </td>
+    
+                                    </tr>
+                                    <!--
+                                  <tr>
+                                      <td>
+                                          <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">관심여행목록</a></button>
+                                      </td>
+                                      <td>
+                                          <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">MY신청목록</a></button>
+                                      </td>
+    
+                                  </tr>-->
+                                  </tbody>
+    
+    
+                </table>
+            </div>
+    
+    
+            <table sec:authorize="hasRole('USER')" border="1px" class="table table-hover" style="width:280px;">
                 <thead>
                 <tr>
                     <td>
-                        <div th:text="로그인해주세요"></div>
+                        <div th:text="${#authentication.name} + '님 '"></div>
                     </td>
-
+    
                     <td>
-
-                        <div sec:authorize="!isAuthenticated()">
-                            <form method="post"  th:action="@{/oauth2/authorization/google}">
-                                <button class="btn btn-outline-secondary" style="float:right;"><a>로그인</a></button>
+    
+                        <div sec:authorize="isAuthenticated()">
+                            <form method="post"  id="logout" name="logout" th:action="@{/logout}">
+                                <button class="btn btn-outline-secondary" style="float:right;"><a>로그아웃</a></button>
                             </form>
                         </div>
-
+    
                     </td>
                 </tr>
                 </thead>
-
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-grid gap-2 d-md-block">
-                                            <a th:href="@{/article/edit}">
-                                                <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-grid gap-2 d-md-block">
-                                            <button type="button" class="btn btn-secondary">내 목표 게시판</button>
-                                        </div>
-                                    </td>
-
-                                </tr>
-
-                                <!--
-                                <tr>
-                                    <td>
-                                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">관심여행목록</a></button>
-                                    </td>
-                                    <td>
-                                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">MY신청목록</a></button>
-                                    </td>
-
-                                </tr>  -->
-                                </tbody>
-
-
+    
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="d-grid gap-2 d-md-block">
+                            <a th:href="@{/article/edit}">
+                                <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-grid gap-2 d-md-block">
+                            <button type="button" class="btn btn-secondary">내목표게시판이동</button>
+                        </div>
+                    </td>
+    
+                </tr>
+                <!--
+                <tr>
+                    <td>
+                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                    </td>
+                    <td>
+                        <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
+                    </td>
+    
+                </tr>
+                -->
+                </tbody>
+    
             </table>
         </div>
-
-
-        <table sec:authorize="hasRole('USER')" border="1px" class="table table-hover" style="width:280px;">
-            <thead>
-            <tr>
-                <td>
-                    <div th:text="${#authentication.name} + '님 '"></div>
-                </td>
-
-                <td>
-
-                    <div sec:authorize="isAuthenticated()">
-                        <form method="post"  id="logout" name="logout" th:action="@{/logout}">
-                            <button class="btn btn-outline-secondary" style="float:right;"><a>로그아웃</a></button>
-                        </form>
-                    </div>
-
-                </td>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr>
-                <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <a th:href="@{/article/edit}">
-                            <button type="button" class="btn btn-secondary">내글 수정/삭제</button>
-                        </a>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button type="button" class="btn btn-secondary">내목표게시판이동</button>
-                    </div>
-                </td>
-
-            </tr>
-            <!--
-            <tr>
-                <td>
-                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
-                </td>
-                <td>
-                    <button class="btn"><a class="link-dark rounded ms-1 small" th:href="@{/}">..</a></button>
-                </td>
-
-            </tr>
-            -->
-            </tbody>
-
-        </table>
+    
     </div>
 
     <!-- //////////////////////////////////////////////////////////////////////////////네비게이션바-->
